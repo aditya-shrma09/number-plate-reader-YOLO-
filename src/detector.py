@@ -1,9 +1,10 @@
 from ultralytics import YOLO
 import cv2
-image = cv2.imread("images\stocksnap-glossy-2597880_1920.jpg")
+from ocr import read_plate
+image = cv2.imread("images\stocksnap-car-2592136_1920.jpg")
 model = YOLO("models/license_plate_detector.pt")
 
-results = model("images\stocksnap-glossy-2597880_1920.jpg")
+results = model("images\stocksnap-car-2592136_1920.jpg")
 
 
 for box in results[0].boxes:
@@ -14,3 +15,8 @@ for box in results[0].boxes:
 
     cv2.imshow("Plate", plate)
     cv2.waitKey(0)
+a= read_plate(plate)
+for i,char in enumerate(a) :
+    print(char)
+    if(i==6):
+        break
